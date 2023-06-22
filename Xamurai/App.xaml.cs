@@ -2,6 +2,7 @@
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+[assembly: ExportFont("OpenSans-Regular.ttf")]
 namespace Xamurai
 {
 	public partial class App : Application
