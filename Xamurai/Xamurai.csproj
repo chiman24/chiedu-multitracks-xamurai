@@ -12,9 +12,16 @@
   <ItemGroup>
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="CarCircleView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -40,6 +47,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Fonts\OpenSans-SemiBold.ttf" />
+    <None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="CarView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -57,5 +70,9 @@
   <ItemGroup>
     <None Include="..\README.md" Link=".Docs\README.md" />
     <None Include=".Docs\Dojo.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
   </ItemGroup>
 </Project>
