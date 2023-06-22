@@ -20,7 +20,7 @@ namespace Xamurai
 		{
 			//if (DeviceInfo.Platform == DevicePlatform.Android)
 			//{
-				//BUG iOS pre7+: doesn't collapse the section, only makes the label invisible
+			//BUG iOS pre7+: doesn't collapse the section, only makes the label invisible
 				IsExpanded = !IsExpanded;
 				OnPropertyChanged(nameof(IsExpanded));
 			//}
