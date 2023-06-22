@@ -3,27 +3,140 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Xamurai"
+			 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              Title="List View">
+
+	<ContentPage.Resources>
+
+		<!--Data Templates for DataTemplateSelector -->
+		<ResourceDictionary>
+			<DataTemplate x:Key="nonMercedesTemplate">
+				<SwipeView>
+					<SwipeView.RightItems>
+						<SwipeItems>
+							<SwipeItem
+								Text="Delete"
+								BackgroundColor="Red"
+								Command="{Binding Source={RelativeSource AncestorType={x:Type local:SampleViewModel}}, Path=DeleteCommand}"
+								CommandParameter="{Binding .}" />
+						</SwipeItems>
+					</SwipeView.RightItems>
+					<local:CarView Padding="0,10,0,0" />
+
+				<!--VisualStateManager for "nonMercedesTemplate" (to detect device orientation)
+					TODO: see if there's a way to extract this into a separate file to improve maintainability/readability.-->
+				<VisualStateManager.VisualStateGroups>
+		            <VisualStateGroup>
+			            <VisualState x:Name="landscapeState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Landscape" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="IsEnabled" Value="False" />
+				            </VisualState.Setters>
+			            </VisualState>
+                         <VisualState x:Name="portraitState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Portrait" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="IsEnabled" Value="True" />
+				            </VisualState.Setters>
+			            </VisualState>
+		            </VisualStateGroup>
+	            </VisualStateManager.VisualStateGroups>
+
+				</SwipeView>
+			</DataTemplate>
+			<DataTemplate x:Key="mercedesTemplate">
+				<SwipeView>
+					<SwipeView.RightItems>
+						<SwipeItems>
+							<SwipeItem
+								Text="Delete"
+								BackgroundColor="Red"
+								Command="{Binding Source={RelativeSource AncestorType={x:Type local:SampleViewModel}}, Path=DeleteCommand}"
+								CommandParameter="{Binding .}" />
+						</SwipeItems>
+					</SwipeView.RightItems>
+					<local:MercedesView Padding="0,10,0,0" />
+
+
+				<!--VisualStateManager for "mercedesTemplate" (to detect device orientation)
+					TODO: see if there's a way to extract this into a separate file to improve maintainability/readability.-->
+				<VisualStateManager.VisualStateGroups>
+		            <VisualStateGroup>
+			            <VisualState x:Name="landscapeState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Landscape" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="IsEnabled" Value="False" />
+				            </VisualState.Setters>
+			            </VisualState>
+                         <VisualState x:Name="portraitState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Portrait" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="IsEnabled" Value="True" />
+				            </VisualState.Setters>
+			            </VisualState>
+		            </VisualStateGroup>
+	            </VisualStateManager.VisualStateGroups>
+
+				</SwipeView>
+			</DataTemplate>
+			<local:CarTypeDataTemplateSelector
+				x:Key="carTypeDataTemplateSelector"
+				MercedesTemplate="{StaticResource mercedesTemplate}"
+				NonMercedesTemplate="{StaticResource nonMercedesTemplate}" />
+		</ResourceDictionary>
+
+	</ContentPage.Resources>
+
 	<ContentPage.Content>
 
+
 		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<ListView Grid.Row="1"
-			          HasUnevenRows="True"
-			          ItemsSource="{Binding Cars}"
-			          SelectionMode="None"
-			          SeparatorVisibility="None">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<local:CarView Padding="0,10,0,0" />
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
+
+			
+			<CollectionView
+				ItemsSource="{Binding Cars}"
+				ItemTemplate="{StaticResource carTypeDataTemplateSelector}">
+
+
+				<CollectionView.ItemsLayout>
+					<LinearItemsLayout Orientation="Vertical"/>
+				</CollectionView.ItemsLayout>
+
+				<!--Detect device orientation and scroll items accordingly.
+					Scroll vertically in "Portrait" mode, and horizontally
+					in "Landscape" mode.
+				-->
+				<VisualStateManager.VisualStateGroups>
+		            <VisualStateGroup>
+			            <VisualState x:Name="landscapeState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Landscape" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="ItemsLayout" Value="HorizontalList" />
+				            </VisualState.Setters>
+			            </VisualState>
+                         <VisualState x:Name="portraitState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Portrait" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="ItemsLayout" Value="VerticalList" />
+				            </VisualState.Setters>
+			            </VisualState>
+		            </VisualStateGroup>
+	            </VisualStateManager.VisualStateGroups>
+
+			</CollectionView>
+			
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>
