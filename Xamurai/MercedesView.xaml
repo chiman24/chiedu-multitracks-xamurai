@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:Xamurai"
+	xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+	x:Name="_mercedesView"
+    x:Class="Xamurai.MercedesView">
+    <ContentView.Content>
+		<!--Ideally, this view would inherit from CarView.xaml, but I'm not sure if there's a way to do that.-->
+        <Grid>
+			<Frame Margin="5,15,5,5"
+			       BorderColor="LightGray"
+			       CornerRadius="5"
+			       HasShadow="False">
+				<Frame.Background>
+					<!-- StartPoint defaults to (0,0) -->
+					<LinearGradientBrush EndPoint="0,1">
+						<GradientStop Color="White"
+									  Offset="0.1" />
+						<GradientStop Color="Green"
+									  Offset="1.0" />
+					</LinearGradientBrush>
+				</Frame.Background>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid IsVisible="{Binding IsExpanded, Source={x:Reference _mercedesView}}">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Label HorizontalOptions="End"
+						       Text="{Binding Notes}"
+						       TextColor="Gray" />
+						<Label Grid.Row="1" Text="{Binding Description}" FontFamily="OpenSans-Regular"/>
+					</Grid>
+				</Grid>
+
+				<VisualStateManager.VisualStateGroups>
+		            <VisualStateGroup>
+			            <VisualState x:Name="landscapeState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Landscape" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="xct:TouchEffect.LongPressCommand" Value="{Binding Source={RelativeSource AncestorType={x:Type local:SampleViewModel}}, Path=LongPressCommand}" />
+								<Setter Property="xct:TouchEffect.LongPressCommandParameter" Value="{Binding .}" />
+				            </VisualState.Setters>
+			            </VisualState>
+                         <VisualState x:Name="portraitState">
+				            <VisualState.StateTriggers>
+					            <OrientationStateTrigger Orientation="Portrait" />
+				            </VisualState.StateTriggers>
+				            <VisualState.Setters>
+					            <Setter Property="xct:TouchEffect.LongPressCommand" Value="" />
+				            </VisualState.Setters>
+			            </VisualState>
+		            </VisualStateGroup>
+	            </VisualStateManager.VisualStateGroups>
+
+			</Frame>
+			<StackLayout Margin="20,0,0,0"
+			             BackgroundColor="White"
+			             HorizontalOptions="Start"
+			             Orientation="Horizontal"
+			             VerticalOptions="Start">
+				<local:CarCircleView Margin="7,0,0,0"
+				                     Command="{Binding ToggleCollapseCommand, Source={x:Reference _mercedesView}}"
+				                     HeightRequest="30"
+				                     HorizontalOptions="Start"
+				                     VerticalOptions="Start"
+				                     WidthRequest="30" />
+				<Label Margin="0,0,7,0"
+				       FontAttributes="Bold"
+				       Text="{Binding Name}"
+				       VerticalTextAlignment="Center" />
+			</StackLayout>
+
+
+		</Grid>
+    </ContentView.Content>
+</ContentView>
+
