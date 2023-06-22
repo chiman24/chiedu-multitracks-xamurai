@@ -1,8 +1,11 @@
-﻿using Prism.Mvvm;
+﻿using Acr.UserDialogs;
+using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
+
 
 namespace Xamurai
 {
@@ -12,6 +15,8 @@ namespace Xamurai
 		{
 			GridSpan = Device.Idiom == TargetIdiom.Phone ? 1 : 2;
 			BuildCars();
+			DeleteCommand = new Command(deleteItem);
+			LongPressCommand = new Command(OnLongPress);
 		}
 
 		private int _gridSpan;
@@ -26,7 +31,7 @@ namespace Xamurai
 		{
 			Cars = new ObservableCollection<Car>
 			{
-				new Car { Abbreviation = "VW", Make=CarMake.VolksWagen, Name = "Polo", Notes = "test car", Description = "Some description", Color = Color.Black },
+				new Car { Abbreviation = "VW", Make=CarMake.VolksWagen, Name = "Polo", Notes = "test car", Description = "This is a Volkswagen!", Color = Color.Black },
 				new Car { Abbreviation = "BMW", Make=CarMake.BMW, Name = "X5", Description = string.Concat(Enumerable.Repeat($"Some description {Environment.NewLine}", 10)), Color = Color.Purple },
 				new Car { Abbreviation = "M", Make=CarMake.Mercedes, Name = "AMG C Class", Description = string.Concat(Enumerable.Repeat($"Some description {Environment.NewLine}", 5)), Color = Color.CornflowerBlue},
 				new Car { Abbreviation = "VW", Make=CarMake.VolksWagen, Name = "Polo", Description = "Some description", Color = Color.Brown },
@@ -55,5 +60,28 @@ namespace Xamurai
 			set { SetProperty(ref _cars, value); }
 		}
 
+		public ICommand DeleteCommand { get; }
+		public ICommand LongPressCommand { get; }
+	
+		void deleteItem(object obj)
+		{
+			Car item = (Car)obj;
+			Cars.Remove(item);
+		}
+
+		void OnLongPress(object obj)
+		{
+			UserDialogs.Instance.Confirm(new ConfirmConfig
+			{
+				Title = "Delete",
+				Message = "Do you want to delete?",
+				OkText = "Yes",
+				CancelText = "No",
+				OnAction = (confirmed) => {
+					if (confirmed)
+						deleteItem(obj);
+				}
+			});
+		}
 	}
 }
