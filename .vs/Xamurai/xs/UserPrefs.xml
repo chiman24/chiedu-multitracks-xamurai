@@ -1,0 +1,47 @@
+﻿<Properties StartupConfiguration="{2B646F88-8011-4F07-99AB-47D986C6C215}|Default">
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.pixel_5_-_api_33" />
+  <MonoDevelop.Ide.ItemProperties.Xamurai.Android PreferredExecutionTarget="Android.pixel_5_-_api_33" />
+  <MonoDevelop.Ide.ItemProperties.Xamurai.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.BA354566-0672-450F-A684-CD78BB2757B1" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="13.2.0.0" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Xamurai/HideStatusBarRenderer.cs">
+    <Files>
+      <File FileName="Xamurai/Experiments/ListViewPage.xaml" Line="120" Column="1" />
+      <File FileName="Xamurai/Experiments/ListViewPage.xaml.cs" />
+      <File FileName="Xamurai/MainPage.xaml.cs" />
+      <File FileName="Xamurai/CarView.xaml" />
+      <File FileName="Xamurai/MainPage.xaml" />
+      <File FileName="Xamurai/CarView.xaml.cs" />
+      <File FileName="Xamurai/CarCircleView.xaml" />
+      <File FileName="Xamurai.iOS/Main.cs" />
+      <File FileName="Xamurai/HideStatusBarRenderer.cs" Line="15" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Xamurai" expanded="True">
+            <Node name="Xamurai" expanded="True">
+              <Node name="Experiments" expanded="True">
+                <Node name="CollectionViewPage.xaml" expanded="True" />
+                <Node name="FlexLayoutPage.xaml" expanded="True" />
+                <Node name="ListViewPage.xaml" expanded="True" />
+              </Node>
+              <Node name="CarCircleView.xaml" expanded="True" />
+              <Node name="CarView.xaml" expanded="True" />
+              <Node name="HideStatusBarRenderer.cs" selected="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+              <Node name="MercedesView.xaml" expanded="True" />
+            </Node>
+            <Node name="Xamurai.Android" expanded="True" />
+            <Node name="Xamurai.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+</Properties>
